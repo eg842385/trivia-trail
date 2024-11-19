@@ -5,12 +5,14 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Java extends Question {
+public class Java extends Question implements QuestionInterface {
+    public Java(){}
     public Java(String question, String[] choices, String answer) {
         super(question, choices, answer);
     }
 
-    public static List<Question> questionSet() {
+    @Override
+    public List<Question> questionSet() {
         ArrayList<Question> questionSet = new ArrayList<>();
 
         questionSet.add(new Java(

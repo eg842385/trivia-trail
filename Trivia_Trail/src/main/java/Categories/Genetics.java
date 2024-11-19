@@ -5,13 +5,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class Genetics extends Question {
+public class Genetics extends Question implements QuestionInterface{
+    public Genetics(){}
 
     public Genetics(String question, String[] choices, String answer) {
         super(question, choices, answer);
     }
 
-    public static List<Question> questionSet() {
+    @Override
+    public List<Question> questionSet() {
         ArrayList<Question> questionSet = new ArrayList<>();
 
 

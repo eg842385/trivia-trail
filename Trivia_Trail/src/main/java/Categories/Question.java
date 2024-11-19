@@ -22,6 +22,8 @@ public abstract class Question {
         this.answer = answer;
     }
 
+    public Question() {}
+
     public String getQuestion() {
         return question;
     }
@@ -34,7 +36,4 @@ public abstract class Question {
         return answer;
     }
 
-    public static List<Question> questionSet() {
-        return new ArrayList<>();
-    }
 }

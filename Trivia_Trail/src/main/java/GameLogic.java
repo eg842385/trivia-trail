@@ -1,9 +1,6 @@
 package Trivia_Trail.src.main.java;
 
-import Trivia_Trail.src.main.java.Categories.DB;
-import Trivia_Trail.src.main.java.Categories.Genetics;
-import Trivia_Trail.src.main.java.Categories.Java;
-import Trivia_Trail.src.main.java.Categories.Question;
+import Trivia_Trail.src.main.java.Categories.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +12,12 @@ public class GameLogic {
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
     private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_ADD_QUESTION, MAIN_MENU_OPTION_PLAY_GAME, MAIN_MENU_OPTION_EXIT};
     private final Scanner scan = new Scanner(System.in);
+    private Genetics genetics = new Genetics();
+    private Java java = new Java();
+    private DB database = new DB();
+    private API api = new API();
+
+
 
     public void welcomeMessage() {
         System.out.println("********************************");
@@ -73,11 +76,11 @@ public class GameLogic {
         List<Question> triviaQuestions;
 
         if (category == 1) {
-            triviaQuestions = Genetics.questionSet(); // genetics questions
+            triviaQuestions = genetics.questionSet(); // genetics questions
         } else if (category == 2) {
-            triviaQuestions = Java.questionSet(); //  java questions
+            triviaQuestions = java.questionSet(); //  java questions
         } else if (category==3) {
-            triviaQuestions = DB.questionSet(); //  databases questions
+            triviaQuestions = database.questionSet(); //  databases questions
         } else {
             System.out.println("Invalid choice!");
             return;

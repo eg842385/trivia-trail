@@ -5,11 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class DB extends Question{
+public class DB extends Question implements QuestionInterface{
     public DB(String question, String[] choices, String answer) {
         super(question, choices, answer);
     }
-    public static List<Question> questionSet() {
+
+    public DB(){
+        super();
+    };
+
+    public List<Question> questionSet() {
         ArrayList<Question> questionSet = new ArrayList<>();
 
         questionSet.add(new DB(
