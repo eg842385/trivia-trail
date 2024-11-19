@@ -68,6 +68,7 @@ public class GameLogic {
         System.out.println("1) Genetics");
         System.out.println("2) Java");
         System.out.println("3) Databases");
+        System.out.println("4) APIs");
         System.out.println();
         System.out.println("Choose a category>> ");
 
@@ -81,7 +82,9 @@ public class GameLogic {
             triviaQuestions = java.questionSet(); //  java questions
         } else if (category==3) {
             triviaQuestions = database.questionSet(); //  databases questions
-        } else {
+        } else if (category==4){
+            triviaQuestions = api.questionSet(); //     api questions
+        }else {
             System.out.println("Invalid choice!");
             return;
         }
