@@ -50,7 +50,7 @@ public class GameLogic {
             String userInput = scan.nextLine().trim();
 
             if (userInput.equals("1")) {
-                // add question method (you can define this logic here)
+                // add question method
 
             } else if (userInput.equals("2")) {
                 displayQuestions();
