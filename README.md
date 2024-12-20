@@ -14,9 +14,9 @@
 
 ## How to Play
 
-1. Start the game: Upon running the game, you will be greeted with a welcome message and the main menu.
+1. **Start the game:** Upon running the game, you will be greeted with a welcome message and the main menu.
 
-2. Main Menu Options:
+2. **Main Menu Options:**
 
   - Add a Question: Allows you to contribute new questions to the game.
 
@@ -24,7 +24,7 @@
 
   - Exit: Exits the game.
 
-3. Answer Questions:
+3. **Answer Questions:**
 
   - Select a category from the list.
 
@@ -32,7 +32,7 @@
 
   - Your score will be calculated and displayed at the end.
 
-4. Play Again or Return to Menu:
+4. **Play Again or Return to Menu:**
 
   - After completing the questions, choose to play again or return to the main menu.
 
