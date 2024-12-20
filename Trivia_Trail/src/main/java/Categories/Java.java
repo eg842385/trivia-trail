@@ -6,15 +6,16 @@ import java.util.List;
 import java.util.Random;
 
 public class Java extends Question implements QuestionInterface {
+    private List<Question> questionSet = new ArrayList<>();
+
     public Java(){}
+
     public Java(String question, String[] choices, String answer) {
         super(question, choices, answer);
     }
 
     @Override
     public List<Question> questionSet() {
-        ArrayList<Question> questionSet = new ArrayList<>();
-
         questionSet.add(new Java(
                 "Overriding and overloading are types of...",
                 new String[]{"Polymorphism", "Inheritance", "Abstraction", "Encapsulation"},
@@ -66,5 +67,11 @@ public class Java extends Question implements QuestionInterface {
         Collections.shuffle(questionSet, new Random());
 
         return questionSet;
+    }
+
+    @Override
+    public void addQuestionToSet(String question, String[] choices, String answer) {
+        Java newQuestion = new Java(question,choices,answer);
+        questionSet.add(newQuestion);
     }
 }

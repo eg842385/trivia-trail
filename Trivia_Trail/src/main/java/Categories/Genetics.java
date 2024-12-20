@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 public class Genetics extends Question implements QuestionInterface{
+    private List<Question> questionSet = new ArrayList<>();
+
     public Genetics(){}
 
     public Genetics(String question, String[] choices, String answer) {
@@ -14,8 +16,6 @@ public class Genetics extends Question implements QuestionInterface{
 
     @Override
     public List<Question> questionSet() {
-        ArrayList<Question> questionSet = new ArrayList<>();
-
 
         questionSet.add(new Genetics(
                 "What is the shape of the DNA molecule?",
@@ -67,4 +67,12 @@ public class Genetics extends Question implements QuestionInterface{
 
         return questionSet;
     }
+
+    @Override
+    public void addQuestionToSet(String question, String[] choices, String answer) {
+        Genetics newQuestion = new Genetics(question, choices, answer);
+        questionSet.add(newQuestion);
+    }
+
+
 }

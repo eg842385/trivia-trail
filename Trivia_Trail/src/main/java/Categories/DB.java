@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class DB extends Question implements QuestionInterface{
+    private List<Question> questionSet = new ArrayList<>();
     public DB(String question, String[] choices, String answer) {
         super(question, choices, answer);
     }
@@ -15,7 +16,6 @@ public class DB extends Question implements QuestionInterface{
     };
 
     public List<Question> questionSet() {
-        ArrayList<Question> questionSet = new ArrayList<>();
 
         questionSet.add(new DB(
                 "Which SQL keyword is used to retrieve data from a database?",
@@ -87,5 +87,12 @@ public class DB extends Question implements QuestionInterface{
 
         return questionSet;
     }
+
+    @Override
+    public void addQuestionToSet(String question, String[] choices, String answer) {
+        DB newQuestion = new DB(question,choices,answer);
+        questionSet.add(newQuestion);
+    }
+
 
 }

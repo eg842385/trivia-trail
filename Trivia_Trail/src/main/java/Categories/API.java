@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Random;
 
 public class API extends Question implements QuestionInterface{
+    private List<Question> questionSet = new ArrayList<>();
 
     public API(String question, String[] choices, String answer) {
         super(question, choices, answer);
@@ -15,8 +16,6 @@ public class API extends Question implements QuestionInterface{
 
     @Override
     public List<Question> questionSet() {
-
-        ArrayList<Question> questionSet = new ArrayList<>();
 
         questionSet.add(new API(
                 "What does REST stand for in RESTful APIs?",
@@ -70,4 +69,11 @@ public class API extends Question implements QuestionInterface{
 
         return questionSet;
     }
+
+    @Override
+    public void addQuestionToSet(String question, String[] choices, String answer) {
+        API newQuestion = new API(question,choices,answer);
+        questionSet.add(newQuestion);
+    }
+
 }

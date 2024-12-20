@@ -3,7 +3,6 @@ package Trivia_Trail.src.main.java.Categories;
 import java.util.ArrayList;
 
 import java.util.Collections;
-import java.util.List;
 
 public abstract class Question {
     private String question;
