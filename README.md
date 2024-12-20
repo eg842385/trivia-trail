@@ -1,4 +1,4 @@
-# TriviaTrail
+# Trivia Trail
 
 **Trivia Trail** began as a project born out of my love for trivia. What started as a fun way to challenge friends and family with interesting questions on a Command Line Interface quickly evolved into a comprehensive study guide as I learned new Java concepts. This game not only tests your knowledge across various categories but also serves as a testament to my journey in mastering Java programming.
 
