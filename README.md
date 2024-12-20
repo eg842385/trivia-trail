@@ -37,4 +37,4 @@
   - After completing the questions, choose to play again or return to the main menu.
 
 
-*Come check back for updates!*
+*Come back for updates!*
