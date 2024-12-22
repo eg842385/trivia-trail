@@ -1,4 +1,4 @@
-package Trivia_Trail.src.main.java;
+package Trivia_Trail.src.main.java.GameLogic;
 
 import Trivia_Trail.src.main.java.Categories.*;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class GameLogic {
+public class QuizLogic {
     private static final String MAIN_MENU_OPTION_ADD_QUESTION = "Add a Question";
     private static final String MAIN_MENU_OPTION_PLAY_GAME = "Select Trivia Category";
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
@@ -16,6 +16,7 @@ public class GameLogic {
     private Java java = new Java();
     private DB database = new DB();
     private API api = new API();
+    private Category categories = new Category();
 
     public void welcomeMessage() {
         System.out.println("********************************");
@@ -60,19 +61,15 @@ public class GameLogic {
 
     public void displayQuestions() {
 
-        System.out.println("\n1) Genetics");
-        System.out.println("2) Java");
-        System.out.println("3) Databases");
-        System.out.println("4) APIs\n");
-        System.out.print("Choose a category>> ");
-
+        categories.displayCategories();
+        System.out.print("\nPlease choose an option >>> ");
         List<Question> triviaQuestions = null;
 
         while(true){
-            int category = scan.nextInt();
+            int userInput = scan.nextInt();
             scan.nextLine();
 
-            switch(category){
+            switch(userInput){
                 case 1:
                     triviaQuestions = genetics.questionSet();
                     break;
@@ -85,6 +82,8 @@ public class GameLogic {
                 case 4:
                     triviaQuestions = api.questionSet();
                     break;
+                case 5:
+                    return;
                 default:
                     System.out.println("Invalid choice! Please select again.");
                     continue;
@@ -122,7 +121,7 @@ public class GameLogic {
             }
         }
 
-        System.out.printf("You got %.2f%% correct!\n", ((double) numberCorrect / triviaQuestions.size()) * 100);
+        calculateScore(numberCorrect,triviaQuestions.size());
 
         // Prompt if the user wants to return to the main menu or play again
         System.out.println("Do you want to play again? (yes/no)");
@@ -130,7 +129,7 @@ public class GameLogic {
         while(true){
             String playAgain = scan.nextLine().trim().toLowerCase();
             if (playAgain.equals("no")) {
-                System.out.println("Thanks for playing! Returning to the main menu...\n");
+                System.out.println("Thanks for playing! Returning to the main menu...");
                 break;
             } else if(playAgain.equals("yes")) {
                 displayQuestions();
@@ -141,22 +140,27 @@ public class GameLogic {
         }
     }
 
+    public void calculateScore(int numCorrect, int numOfQs){
+        int score = (numCorrect * 100) / numOfQs;
+        System.out.printf("You got %d%% correct!\n", score);
+    }
+
     public void addQuestion(){
 
         System.out.println("\nWhich category would you like to add your question to?\n");
-        System.out.println("1) Genetics");
-        System.out.println("2) Java");
-        System.out.println("3) Databases");
-        System.out.println("4) APIs");
-        System.out.println("5) Create a new category");
-        System.out.println("0) Return to Main Menu");
+        categories.displayCategories();
         System.out.print("\nChoose a category>> ");
 
-        int category = scan.nextInt();
+        int userInput = scan.nextInt();
         scan.nextLine();
 
-        if(category == 0){
+        if(userInput == categories.lengthOfCategories()){
             return; // return to main menu
+        }
+
+        if(userInput < 1 || userInput > categories.lengthOfCategories()){
+            System.out.println("\nThat's not a valid choice.");
+            return;
         }
 
         String newQ = getNewQuestion();
@@ -166,12 +170,11 @@ public class GameLogic {
         displayNewQuestion(newQ,newChoices,newAnswer);
 
         if(confirmQuestion()){
-            addToCategory(category,newQ,newChoices,newAnswer);
+            addToCategory(userInput,newQ,newChoices,newAnswer);
         } else {
             System.out.println("Returning to add question menu...");
             addQuestion();
         }
-
     }
 
     public String getNewQuestion(){

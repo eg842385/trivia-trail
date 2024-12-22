@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface QuestionInterface {
 
-    public List<Question> questionSet();
+    List<Question> questionSet();
 
-    public void addQuestionToSet(String question, String[] choices, String answer);
+    void addQuestionToSet(String question, String[] choices, String answer);
 }
