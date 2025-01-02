@@ -10,14 +10,15 @@ import java.util.Scanner;
 public class QuizLogic {
     private static final String MAIN_MENU_OPTION_ADD_QUESTION = "Add a Question";
     private static final String MAIN_MENU_OPTION_PLAY_GAME = "Select Trivia Category";
+    private static final String MAIN_MENU_OPTION_ADD_CATEGORY = "Add a New Category";
     private static final String MAIN_MENU_OPTION_EXIT = "Exit";
-    private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_ADD_QUESTION, MAIN_MENU_OPTION_PLAY_GAME, MAIN_MENU_OPTION_EXIT};
+    private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_ADD_QUESTION, MAIN_MENU_OPTION_PLAY_GAME, MAIN_MENU_OPTION_ADD_CATEGORY,MAIN_MENU_OPTION_EXIT};
     private final Scanner scan = new Scanner(System.in);
     private final Genetics genetics = new Genetics();
     private final Java java = new Java();
     private final DB database = new DB();
     private final API api = new API();
-    private final Category categories = new Category();
+    private Category categories = new Category();
 
     public void welcomeMessage() {
         System.out.println("********************************");
@@ -37,6 +38,7 @@ public class QuizLogic {
     }
 
     public void run() {
+        categories.loadCategoriesFromFile();
         boolean isRunning = true;
         welcomeMessage();
 
@@ -52,6 +54,9 @@ public class QuizLogic {
                     displayQuestions();
                     break;
                 case "3":
+                    addNewCategory();
+                    break;
+                case "4":
                     isRunning = false;
                     break;
                 default:
@@ -70,6 +75,10 @@ public class QuizLogic {
             int userInput = scan.nextInt();
             scan.nextLine();
 
+            if (userInput == categories.lengthOfCategories()) {
+                return;
+            }
+
             switch (userInput) {
                 case 1:
                     triviaQuestions = genetics.questionSet();
@@ -83,8 +92,7 @@ public class QuizLogic {
                 case 4:
                     triviaQuestions = api.questionSet();
                     break;
-                case 5:
-                    return;
+//                    add logic to display questions from newly added category
                 default:
                     System.out.println("Invalid choice! Please select again.");
                     continue;
@@ -256,12 +264,22 @@ public class QuizLogic {
                 api.addQuestionToSet(question, choices, answer);
                 break;
             case 5:
-                System.out.println("Coming soon....");
+//                logic to save question a newly added category
                 break;
             default:
                 System.out.println("Invalid choice!");
                 break;
         }
+    }
+
+    public void addNewCategory() {
+        System.out.println("\nEnter the name of the new category:");
+        String categoryName = scan.nextLine().trim();
+
+        categories.addCategory(categoryName);
+        categories.saveCategoriesToFile();
+
+        System.out.println("New category '" + categoryName + "' added successfully!");
     }
 
 }
